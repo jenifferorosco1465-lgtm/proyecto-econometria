@@ -1,0 +1,488 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Proyecto Final de Econometría</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f2f4f7;
+            color: #222;
+        }
+
+        header {
+            background: #1f2937;
+            color: white;
+            padding: 35px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0 0 10px;
+            font-size: 32px;
+        }
+
+        header p {
+            margin: 5px;
+            font-size: 17px;
+        }
+
+        .contenedor {
+            max-width: 1100px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .tarjeta {
+            background: white;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+        }
+
+        h2 {
+            color: #1f2937;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 8px;
+        }
+
+        h3 {
+            color: #374151;
+        }
+
+        .resultados {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .resultado {
+            background: #f8fafc;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 18px;
+            text-align: center;
+        }
+
+        .resultado strong {
+            display: block;
+            font-size: 25px;
+            margin-top: 8px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background: #e5e7eb;
+        }
+
+        .grafico {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .grafico img {
+            max-width: 100%;
+            width: 750px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+
+        .nota {
+            background: #f8fafc;
+            padding: 15px;
+            border-left: 5px solid #555;
+            margin-top: 15px;
+        }
+
+        footer {
+            text-align: center;
+            background: #1f2937;
+            color: white;
+            padding: 25px;
+            margin-top: 40px;
+        }
+
+        @media (max-width: 800px) {
+            .resultados {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .resultados {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>Proyecto Final de Econometría</h1>
+    <p>Factores asociados a la probabilidad de trabajar en Ecuador</p>
+    <p>Modelos Logit y Probit</p>
+</header>
+
+<div class="contenedor">
+
+    <section class="tarjeta">
+        <h2>1. Información del proyecto</h2>
+
+        <p><strong>Universidad:</strong> Universidad Técnica de Cotopaxi</p>
+        <p><strong>Carrera:</strong> Economía</p>
+        <p><strong>Asignatura:</strong> Econometría</p>
+        <p><strong>Autora:</strong> Jeniffer Orosco</p>
+        <p><strong>Fuente de información:</strong> Encuesta de Condiciones de Vida (ECV6R) - INEC Ecuador</p>
+    </section>
+
+    <section class="tarjeta">
+        <h2>2. Pregunta de investigación</h2>
+
+        <p>
+            ¿Qué factores se encuentran asociados con la probabilidad
+            de que una persona se encuentre trabajando?
+        </p>
+    </section>
+
+    <section class="tarjeta">
+        <h2>3. Objetivo</h2>
+
+        <p>
+            Analizar los factores asociados con la probabilidad de trabajar
+            mediante modelos econométricos de respuesta binaria Logit y Probit.
+        </p>
+    </section>
+
+    <section class="tarjeta">
+        <h2>4. Datos y variables</h2>
+
+        <p>
+            Se utiliza información de la Encuesta de Condiciones de Vida
+            (ECV6R) del Instituto Nacional de Estadística y Censos (INEC).
+        </p>
+
+        <ul>
+            <li><strong>Unidad de observación:</strong> persona.</li>
+            <li><strong>Variable dependiente:</strong> trabaja.</li>
+            <li><strong>Variables explicativas:</strong> hombre, EDAD, edad² y urbano.</li>
+            <li><strong>Factor de expansión:</strong> FEXP.</li>
+            <li><strong>Observaciones utilizadas:</strong> 85.950.</li>
+        </ul>
+    </section>
+
+    <section class="tarjeta">
+        <h2>5. Metodología</h2>
+
+        <p>
+            Se estimaron modelos Logit y Probit para analizar la probabilidad
+            de que una persona se encuentre trabajando. Se incorporaron
+            variables relacionadas con sexo, edad y área de residencia.
+        </p>
+
+        <p>
+            Para la edad se incluyó también su término cuadrático con el
+            objetivo de representar una posible relación no lineal.
+        </p>
+
+        <p>
+            Además, se calcularon efectos marginales promedio, AUC,
+            accuracy, matriz de confusión y factores de inflación de la
+            varianza (VIF).
+        </p>
+    </section>
+
+    <section class="tarjeta">
+        <h2>6. Resultados principales</h2>
+
+        <div class="resultados">
+
+            <div class="resultado">
+                Pseudo R² Logit
+                <strong>0.2748</strong>
+            </div>
+
+            <div class="resultado">
+                Pseudo R² Probit
+                <strong>0.2745</strong>
+            </div>
+
+            <div class="resultado">
+                AUC Logit
+                <strong>0.8341</strong>
+            </div>
+
+            <div class="resultado">
+                Accuracy
+                <strong>0.7713</strong>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="tarjeta">
+
+        <h2>7. Efectos marginales promedio</h2>
+
+        <table>
+            <tr>
+                <th>Variable</th>
+                <th>Logit</th>
+                <th>Probit</th>
+            </tr>
+
+            <tr>
+                <td>hombre</td>
+                <td>0.2017</td>
+                <td>0.2035</td>
+            </tr>
+
+            <tr>
+                <td>EDAD</td>
+                <td>0.0461</td>
+                <td>0.0464</td>
+            </tr>
+
+            <tr>
+                <td>edad²</td>
+                <td>-0.0005</td>
+                <td>-0.0005</td>
+            </tr>
+
+            <tr>
+                <td>urbano</td>
+                <td>-0.1443</td>
+                <td>-0.1435</td>
+            </tr>
+        </table>
+
+        <div class="nota">
+            Los efectos marginales se interpretan como asociaciones
+            estadísticas y no como efectos causales.
+        </div>
+
+    </section>
+
+    <section class="tarjeta">
+
+        <h2>8. Comparación Logit vs Probit</h2>
+
+        <table>
+            <tr>
+                <th>Modelo</th>
+                <th>Pseudo R²</th>
+                <th>AIC</th>
+                <th>Log-Likelihood</th>
+            </tr>
+
+            <tr>
+                <td>Logit</td>
+                <td>0.274846</td>
+                <td>83332.02</td>
+                <td>-41661.01</td>
+            </tr>
+
+            <tr>
+                <td>Probit</td>
+                <td>0.274506</td>
+                <td>83371.11</td>
+                <td>-41680.55</td>
+            </tr>
+
+        </table>
+
+        <p>
+            Ambos modelos presentan resultados muy similares. El modelo Logit
+            presenta ligeramente menor AIC y un pseudo R² ligeramente superior,
+            por lo que constituye la especificación preferida dentro de esta
+            comparación.
+        </p>
+
+    </section>
+
+    <section class="tarjeta">
+
+        <h2>9. Diagnóstico de multicolinealidad</h2>
+
+        <table>
+            <tr>
+                <th>Variable</th>
+                <th>VIF</th>
+            </tr>
+
+            <tr>
+                <td>hombre</td>
+                <td>1.0006</td>
+            </tr>
+
+            <tr>
+                <td>EDAD</td>
+                <td>16.8969</td>
+            </tr>
+
+            <tr>
+                <td>edad²</td>
+                <td>16.9013</td>
+            </tr>
+
+            <tr>
+                <td>urbano</td>
+                <td>1.0052</td>
+            </tr>
+        </table>
+
+        <p>
+            Los VIF elevados de EDAD y edad² son esperables debido a la
+            relación matemática entre una variable y su transformación
+            cuadrática. Esto debe considerarse al interpretar los
+            coeficientes individuales.
+        </p>
+
+    </section>
+
+    <section class="tarjeta">
+
+        <h2>10. Capacidad predictiva</h2>
+
+        <p><strong>AUC del modelo Logit:</strong> 0.8341</p>
+
+        <p><strong>Accuracy:</strong> 0.7713</p>
+
+        <h3>Matriz de confusión</h3>
+
+        <table>
+            <tr>
+                <th></th>
+                <th>Predicción 0</th>
+                <th>Predicción 1</th>
+            </tr>
+
+            <tr>
+                <th>Real 0</th>
+                <td>21.547</td>
+                <td>11.912</td>
+            </tr>
+
+            <tr>
+                <th>Real 1</th>
+                <td>7.749</td>
+                <td>44.742</td>
+            </tr>
+        </table>
+
+    </section>
+
+    <section class="tarjeta">
+
+        <h2>11. Gráficos</h2>
+
+        <div class="grafico">
+
+            <h3>Curva ROC del modelo Logit</h3>
+
+            <img
+                src="../outputs/figures/curva_roc.png"
+                alt="Curva ROC del modelo Logit"
+                onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
+            >
+
+            <p style="display:none;">
+                El gráfico de la curva ROC no pudo cargarse desde la ubicación
+                indicada.
+            </p>
+
+        </div>
+
+    </section>
+
+    <section class="tarjeta">
+
+        <h2>12. Discusión</h2>
+
+        <p>
+            Los resultados muestran asociaciones estadísticamente significativas
+            entre las características individuales consideradas y la probabilidad
+            de trabajar. El efecto marginal promedio asociado con la variable
+            hombre es positivo, mientras que el correspondiente a urbano es
+            negativo en la especificación estimada.
+        </p>
+
+        <p>
+            La edad presenta un efecto positivo acompañado de un término
+            cuadrático negativo, lo que sugiere una relación no lineal entre
+            edad y probabilidad de trabajar.
+        </p>
+
+        <p>
+            Los resultados deben interpretarse como asociaciones estadísticas
+            y no como evidencia de relaciones causales.
+        </p>
+
+    </section>
+
+    <section class="tarjeta">
+
+        <h2>13. Conclusiones y limitaciones</h2>
+
+        <p>
+            Los modelos Logit y Probit permiten estudiar la probabilidad de
+            trabajar a partir de características individuales y territoriales.
+            Los resultados de ambos modelos son similares y presentan una
+            capacidad predictiva razonable.
+        </p>
+
+        <p>
+            El modelo Logit presenta un AUC de 0.8341 y una exactitud de
+            clasificación de 0.7713.
+        </p>
+
+        <p>
+            Entre las limitaciones se encuentra el tratamiento del diseño
+            muestral de la encuesta y la utilización del factor de expansión
+            sin incorporar necesariamente todos los componentes del diseño
+            complejo.
+        </p>
+
+    </section>
+
+    <section class="tarjeta">
+
+        <h2>14. Referencias</h2>
+
+        <p>
+            Las referencias académicas y metodológicas utilizadas se encuentran
+            documentadas en el minipaper del proyecto.
+        </p>
+
+    </section>
+
+</div>
+
+<footer>
+    <p>Proyecto Final de Econometría - Universidad Técnica de Cotopaxi</p>
+    <p>Jeniffer Orosco - 2026</p>
+</footer>
+
+</body>
+</html>
