@@ -1,132 +1,709 @@
 ﻿<!DOCTYPE html>
+
 <html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Proyecto Final de Econometría</title>
+<title>Proyecto Final de Econometría - Jeniffer Orosco</title>
 
 <style>
+*{
+    box-sizing:border-box;
+}
+
 body{
-    font-family:Arial,sans-serif;
-    max-width:1100px;
-    margin:auto;
-    padding:35px;
+    margin:0;
+    font-family:Arial, Helvetica, sans-serif;
+    background:#f3f4f6;
+    color:#1f2937;
     line-height:1.6;
-    background:#f7f7f7;
+}
+
+header{
+    background:#111827;
+    color:white;
+    padding:45px 20px;
+    text-align:center;
+}
+
+header h1{
+    margin:0 0 10px;
+    font-size:34px;
+}
+
+header p{
+    margin:5px;
+}
+
+.container{
+    max-width:1150px;
+    margin:auto;
+    padding:25px;
 }
 
 .card{
     background:white;
+    margin:22px 0;
+    padding:28px;
     border-radius:12px;
-    padding:22px;
-    margin:18px 0;
-    box-shadow:0 2px 8px rgba(0,0,0,.08);
+    box-shadow:0 2px 10px rgba(0,0,0,.08);
 }
 
-h1,h2{
-    color:#222;
+h2{
+    color:#111827;
+    border-bottom:2px solid #e5e7eb;
+    padding-bottom:8px;
+}
+
+h3{
+    color:#374151;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:18px;
+}
+
+.metric{
+    background:#f9fafb;
+    border:1px solid #e5e7eb;
+    border-radius:10px;
+    padding:20px;
+    text-align:center;
+}
+
+.metric strong{
+    display:block;
+    font-size:28px;
+    margin-top:8px;
 }
 
 table{
-    border-collapse:collapse;
     width:100%;
+    border-collapse:collapse;
+    margin-top:15px;
 }
 
 th,td{
-    border:1px solid #ddd;
+    border:1px solid #d1d5db;
     padding:10px;
+    text-align:center;
 }
 
 th{
-    background:#eee;
+    background:#e5e7eb;
 }
 
-a{
-    word-break:break-all;
+.figure{
+    text-align:center;
+    margin:25px 0;
+}
+
+.figure img{
+    max-width:100%;
+    height:auto;
+    border:1px solid #ddd;
+    border-radius:8px;
+}
+
+.note{
+    background:#f9fafb;
+    border-left:5px solid #374151;
+    padding:15px;
+    margin:15px 0;
+}
+
+.links a{
+    display:inline-block;
+    margin:7px 7px 7px 0;
+    padding:10px 15px;
+    background:#111827;
+    color:white;
+    text-decoration:none;
+    border-radius:7px;
+}
+
+footer{
+    background:#111827;
+    color:white;
+    text-align:center;
+    padding:25px;
+    margin-top:30px;
+}
+
+@media(max-width:700px){
+    header h1{
+        font-size:25px;
+    }
+
+    .card{
+        padding:18px;
+    }
+
+    table{
+        font-size:13px;
+    }
 }
 </style>
+
 </head>
 
 <body>
 
-<h1>Factores asociados a la probabilidad de trabajar en Ecuador</h1>
+<header>
+    <h1>Proyecto Final de Econometría</h1>
+    <p><strong>Factores asociados a la probabilidad de trabajar en Ecuador</strong></p>
+    <p>Modelos Logit y Probit</p>
+    <p>Autora: Jeniffer Orosco</p>
+    <p>Universidad Técnica de Cotopaxi</p>
+</header>
+
+<div class="container">
+
+<section class="card">
+<h2>1. Pregunta de investigación</h2>
 
 <p>
-Proyecto Final de Econometría Aplicada.
-Análisis mediante modelos Logit y Probit utilizando información
-de la Encuesta de Condiciones de Vida (ECV6R) del INEC.
+¿Qué factores se encuentran asociados con la probabilidad de que una persona
+se encuentre trabajando en Ecuador?
 </p>
+</section>
 
-<div class="card">
-<h2>Pregunta de investigación</h2>
+<section class="card">
+<h2>2. Objetivo</h2>
 
 <p>
-¿Qué factores se encuentran asociados con la probabilidad de que
-una persona se encuentre trabajando?
+Analizar los factores asociados con la probabilidad de trabajar mediante
+modelos econométricos de respuesta binaria Logit y Probit, utilizando
+información de la Encuesta de Condiciones de Vida (ECV6R).
 </p>
-</div>
+</section>
 
-<div class="card">
-<h2>Objetivo</h2>
-
-<p>
-Analizar los factores asociados con la probabilidad de trabajar
-mediante modelos econométricos de respuesta binaria Logit y Probit.
-</p>
-</div>
-
-<div class="card">
-<h2>Datos</h2>
+<section class="card">
+<h2>3. Datos</h2>
 
 <ul>
-<li>Fuente: INEC - Encuesta de Condiciones de Vida ECV6R.</li>
-<li>Unidad de observación: persona.</li>
-<li>Variable dependiente: trabaja.</li>
-<li>Variables explicativas: hombre, EDAD, edad2 y urbano.</li>
+<li><strong>Fuente:</strong> Instituto Nacional de Estadística y Censos (INEC).</li>
+<li><strong>Base:</strong> Encuesta de Condiciones de Vida (ECV6R).</li>
+<li><strong>Unidad de observación:</strong> Persona.</li>
+<li><strong>Observaciones utilizadas:</strong> 85.950.</li>
+<li><strong>Variable dependiente:</strong> trabaja.</li>
+<li><strong>Variables explicativas:</strong> hombre, EDAD, edad2 y urbano.</li>
+<li><strong>Factor de expansión:</strong> FEXP.</li>
 </ul>
-</div>
+</section>
 
-<div class="card">
-<h2>Metodología</h2>
-
-<p>
-Se estiman y comparan modelos Logit y Probit.
-También se calculan efectos marginales promedio y se evalúa
-el desempeño predictivo.
-</p>
-</div>
-
-<div class="card">
-<h2>Resultados</h2>
+<section class="card">
+<h2>4. Metodología</h2>
 
 <p>
-Los valores mostrados en esta sección deben corresponder a la
-ejecución final del código Python almacenado en el repositorio.
+Se estimaron modelos Logit y Probit para estudiar una variable dependiente
+binaria que representa la condición laboral de las personas.
 </p>
 
 <p>
-La interpretación debe realizarse como asociación estadística
-y no como causalidad.
+La variable <strong>trabaja</strong> toma el valor de 1 cuando la persona
+trabaja y 0 cuando no trabaja.
 </p>
-</div>
-
-<div class="card">
-<h2>Conclusiones y limitaciones</h2>
 
 <p>
-Los modelos Logit y Probit permiten analizar la probabilidad de
-trabajar considerando características individuales y del área
-de residencia. Las conclusiones deben interpretarse teniendo
-en cuenta las limitaciones del diseño muestral de la encuesta
-y del tratamiento estadístico aplicado.
+Se incorporaron las variables hombre, edad, edad al cuadrado y área de
+residencia. La inclusión de la edad al cuadrado permite representar una
+posible relación no lineal entre la edad y la probabilidad de trabajar.
 </p>
+
+<div class="note">
+<strong>Importante:</strong> Los resultados deben interpretarse como
+asociaciones estadísticas y no como efectos causales.
+</div>
+</section>
+
+<section class="card">
+<h2>5. Resultados principales</h2>
+
+<div class="grid">
+
+<div class="metric">
+Observaciones
+<strong>85.950</strong>
 </div>
 
-<div class="card">
-<h2>Autora</h2>
-<p>Jeniffer Orosco</p>
+<div class="metric">
+Pseudo R² Logit
+<strong>0.2748</strong>
 </div>
+
+<div class="metric">
+Pseudo R² Probit
+<strong>0.2745</strong>
+</div>
+
+<div class="metric">
+AUC Logit
+<strong>0.8341</strong>
+</div>
+
+<div class="metric">
+Accuracy
+<strong>0.7713</strong>
+</div>
+
+</div>
+</section>
+
+<section class="card">
+<h2>6. Modelo Logit</h2>
+
+<table>
+<tr>
+<th>Variable</th>
+<th>Coeficiente</th>
+<th>p-valor</th>
+</tr>
+
+<tr>
+<td>Intercept</td>
+<td>-4.8288</td>
+<td>&lt; 0.001</td>
+</tr>
+
+<tr>
+<td>hombre</td>
+<td>1.2719</td>
+<td>&lt; 0.001</td>
+</tr>
+
+<tr>
+<td>EDAD</td>
+<td>0.2906</td>
+<td>&lt; 0.001</td>
+</tr>
+
+<tr>
+<td>edad2</td>
+<td>-0.0031</td>
+<td>&lt; 0.001</td>
+</tr>
+
+<tr>
+<td>urbano</td>
+<td>-0.9100</td>
+<td>&lt; 0.001</td>
+</tr>
+</table>
+
+<p>
+El modelo Logit presentó un pseudo R² de <strong>0.2748</strong> y todos
+los regresores incluidos resultaron estadísticamente significativos al
+nivel convencional.
+</p>
+</section>
+
+<section class="card">
+<h2>7. Modelo Probit</h2>
+
+<table>
+<tr>
+<th>Variable</th>
+<th>Coeficiente</th>
+<th>p-valor</th>
+</tr>
+
+<tr>
+<td>Intercept</td>
+<td>-2.8353</td>
+<td>&lt; 0.001</td>
+</tr>
+
+<tr>
+<td>hombre</td>
+<td>0.7455</td>
+<td>&lt; 0.001</td>
+</tr>
+
+<tr>
+<td>EDAD</td>
+<td>0.1701</td>
+<td>&lt; 0.001</td>
+</tr>
+
+<tr>
+<td>edad2</td>
+<td>-0.0018</td>
+<td>&lt; 0.001</td>
+</tr>
+
+<tr>
+<td>urbano</td>
+<td>-0.5255</td>
+<td>&lt; 0.001</td>
+</tr>
+</table>
+
+<p>
+El modelo Probit presentó un pseudo R² de <strong>0.2745</strong>.
+Sus resultados son muy similares a los obtenidos mediante Logit.
+</p>
+</section>
+
+<section class="card">
+<h2>8. Efectos marginales promedio</h2>
+
+<table>
+<tr>
+<th>Variable</th>
+<th>Logit</th>
+<th>Probit</th>
+</tr>
+
+<tr>
+<td>hombre</td>
+<td>0.2017</td>
+<td>0.2035</td>
+</tr>
+
+<tr>
+<td>EDAD</td>
+<td>0.0461</td>
+<td>0.0464</td>
+</tr>
+
+<tr>
+<td>edad2</td>
+<td>-0.0005</td>
+<td>-0.0005</td>
+</tr>
+
+<tr>
+<td>urbano</td>
+<td>-0.1443</td>
+<td>-0.1435</td>
+</tr>
+</table>
+
+<p>
+En el modelo Logit, el efecto marginal promedio asociado a
+<strong>hombre</strong> es 0.2017. Esto indica una asociación positiva
+con la probabilidad estimada de trabajar, manteniendo las demás variables
+del modelo en consideración.
+</p>
+
+<p>
+La variable <strong>EDAD</strong> presenta un efecto marginal promedio
+positivo de 0.0461, mientras que <strong>edad2</strong> presenta un efecto
+negativo. En conjunto, estos resultados son compatibles con una relación
+no lineal entre edad y probabilidad de trabajar.
+</p>
+
+<p>
+La variable <strong>urbano</strong> presenta un efecto marginal promedio
+de -0.1443 respecto de la categoría de referencia rural.
+</p>
+
+<div class="note">
+Los efectos marginales se interpretan como asociaciones promedio del modelo
+estimado. No deben interpretarse como efectos causales.
+</div>
+</section>
+
+<section class="card">
+<h2>9. Comparación Logit vs Probit</h2>
+
+<table>
+<tr>
+<th>Modelo</th>
+<th>Pseudo R²</th>
+<th>AIC</th>
+<th>Log-Likelihood</th>
+</tr>
+
+<tr>
+<td>Logit</td>
+<td>0.274846</td>
+<td>83332.02</td>
+<td>-41661.01</td>
+</tr>
+
+<tr>
+<td>Probit</td>
+<td>0.274506</td>
+<td>83371.11</td>
+<td>-41680.55</td>
+</tr>
+</table>
+
+<p>
+Los dos modelos presentan resultados muy similares. El Logit obtiene
+ligeramente menor AIC y un pseudo R² marginalmente superior, por lo que
+se toma como modelo principal para la evaluación predictiva.
+</p>
+</section>
+
+<section class="card">
+<h2>10. Diagnóstico de multicolinealidad</h2>
+
+<table>
+<tr>
+<th>Variable</th>
+<th>VIF</th>
+</tr>
+
+<tr>
+<td>const</td>
+<td>16.6099</td>
+</tr>
+
+<tr>
+<td>hombre</td>
+<td>1.0006</td>
+</tr>
+
+<tr>
+<td>EDAD</td>
+<td>16.8969</td>
+</tr>
+
+<tr>
+<td>edad2</td>
+<td>16.9013</td>
+</tr>
+
+<tr>
+<td>urbano</td>
+<td>1.0052</td>
+</tr>
+</table>
+
+<p>
+Los valores elevados de VIF de EDAD y edad2 son esperables debido a la
+relación matemática entre una variable y su transformación cuadrática.
+Por ello, estos valores deben interpretarse con precaución y no implican
+necesariamente un problema de especificación.
+</p>
+</section>
+
+<section class="card">
+<h2>11. Capacidad predictiva</h2>
+
+<div class="grid">
+
+<div class="metric">
+AUC
+<strong>0.8341</strong>
+</div>
+
+<div class="metric">
+Accuracy
+<strong>77.13%</strong>
+</div>
+
+</div>
+
+<h3>Matriz de confusión</h3>
+
+<table>
+<tr>
+<th></th>
+<th>Predicción 0</th>
+<th>Predicción 1</th>
+</tr>
+
+<tr>
+<th>Real 0</th>
+<td>21.547</td>
+<td>11.912</td>
+</tr>
+
+<tr>
+<th>Real 1</th>
+<td>7.749</td>
+<td>44.742</td>
+</tr>
+</table>
+
+<p>
+El AUC de 0.8341 indica una capacidad de discriminación adecuada del
+modelo Logit. La exactitud global alcanzó 0.7713.
+</p>
+</section>
+
+<section class="card">
+<h2>12. Gráficos y evidencia visual</h2>
+
+<div class="figure">
+<h3>Probabilidad observada de trabajar según edad</h3>
+<img src="../outputs/figures/probabilidad_edad.png"
+     alt="Probabilidad de trabajar según edad">
+</div>
+
+<div class="figure">
+<h3>Probabilidad observada de trabajar según sexo</h3>
+<img src="../outputs/figures/probabilidad_sexo.png"
+     alt="Probabilidad de trabajar según sexo">
+</div>
+
+<div class="figure">
+<h3>Probabilidad observada de trabajar según área</h3>
+<img src="../outputs/figures/probabilidad_area.png"
+     alt="Probabilidad de trabajar según área">
+</div>
+
+<div class="figure">
+<h3>Curva ROC</h3>
+<img src="../outputs/figures/curva_roc.png"
+     alt="Curva ROC del modelo Logit">
+</div>
+
+</section>
+
+<section class="card">
+<h2>13. Discusión</h2>
+
+<p>
+Los resultados muestran asociaciones estadísticamente significativas entre
+las características individuales consideradas y la probabilidad de trabajar.
+La variable hombre presenta una asociación positiva, mientras que la edad
+muestra una relación no lineal debido a la inclusión de su término cuadrático.
+</p>
+
+<p>
+Los resultados de Logit y Probit son consistentes entre sí, lo que proporciona
+evidencia de robustez respecto de la elección de la función de distribución
+utilizada para modelar la variable dependiente binaria.
+</p>
+
+<p>
+El desempeño predictivo obtenido, medido mediante AUC y accuracy, indica que
+el modelo posee una capacidad razonable para discriminar entre personas que
+trabajan y personas que no trabajan dentro de la muestra analizada.
+</p>
+</section>
+
+<section class="card">
+<h2>14. Conclusiones</h2>
+
+<p>
+El análisis permitió identificar asociaciones entre sexo, edad y área de
+residencia y la probabilidad de trabajar en Ecuador, utilizando modelos
+Logit y Probit.
+</p>
+
+<p>
+Los dos modelos presentaron resultados similares. El modelo Logit obtuvo
+un pseudo R² de 0.2748 y un AUC de 0.8341, mientras que el accuracy fue
+0.7713.
+</p>
+
+<p>
+Los efectos marginales muestran una asociación positiva de la variable
+hombre y de la edad, mientras que el término cuadrático de edad presenta
+una asociación negativa. La variable urbano presenta una asociación negativa
+respecto de la categoría rural.
+</p>
+
+<p>
+Estos resultados deben interpretarse como asociaciones estadísticas y no
+como evidencia de relaciones causales.
+</p>
+</section>
+
+<section class="card">
+<h2>15. Limitaciones</h2>
+
+<ul>
+<li>
+El análisis utiliza información observacional y, por lo tanto, no permite
+establecer causalidad.
+</li>
+
+<li>
+La ECV6R posee un diseño muestral complejo y el tratamiento del factor de
+expansión no necesariamente incorpora todos los componentes del diseño.
+</li>
+
+<li>
+La especificación considera un conjunto limitado de variables explicativas.
+</li>
+
+<li>
+Los resultados dependen de la calidad y disponibilidad de la información
+contenida en la encuesta.
+</li>
+</ul>
+</section>
+
+<section class="card">
+<h2>16. Reproducibilidad y repositorio</h2>
+
+<p>
+El proyecto contiene los códigos, documentación, resultados y estructura
+necesarios para reproducir el análisis econométrico.
+</p>
+
+<div class="links">
+
+<a href="https://github.com/jenifferorosco1465-lgtm/proyecto-econometria"
+target="_blank">
+Repositorio GitHub </a>
+
+<a href="https://proyecto-econometria-eight.vercel.app"
+target="_blank">
+Proyecto publicado en Vercel </a>
+
+</div>
+</section>
+
+<section class="card">
+<h2>17. Referencias</h2>
+
+<p>
+Instituto Nacional de Estadística y Censos (INEC). (s. f.).
+<strong>Encuesta de Condiciones de Vida (ECV).</strong>
+</p>
+
+<p>
+Gujarati, D. N., & Porter, D. C. (2009).
+<strong>Econometría</strong> (5.ª ed.). McGraw-Hill.
+</p>
+
+<p>
+Wooldridge, J. M. (2020).
+<strong>Introductory Econometrics: A Modern Approach</strong> (7th ed.).
+Cengage.
+</p>
+
+<p>
+Greene, W. H. (2018).
+<strong>Econometric Analysis</strong> (8th ed.). Pearson.
+</p>
+
+<p>
+Hosmer, D. W., Lemeshow, S., & Sturdivant, R. X. (2013).
+<strong>Applied Logistic Regression</strong> (3rd ed.). Wiley.
+</p>
+</section>
+
+<section class="card">
+<h2>18. Declaración de uso de inteligencia artificial</h2>
+
+<p>
+Durante el desarrollo de este proyecto se utilizaron herramientas de
+inteligencia artificial como apoyo para la revisión de código, organización
+del repositorio, documentación y mejora de la redacción. La autora verificó
+los procedimientos, estimaciones, referencias e interpretaciones y asume la
+responsabilidad sobre el contenido presentado.
+</p>
+</section>
+
+</div>
+
+<footer>
+<p><strong>Proyecto Final de Econometría</strong></p>
+<p>Jeniffer Orosco - Universidad Técnica de Cotopaxi</p>
+<p>2026</p>
+</footer>
 
 </body>
 </html>
