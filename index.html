@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Proyecto Final de Econometría</title>
+    <title>Proyecto Final de Econometría | Logit y Probit</title>
 
     <style>
         * {
@@ -14,12 +14,12 @@
         body {
             margin: 0;
             font-family: Arial, Helvetica, sans-serif;
-            background: #f2f4f7;
-            color: #222;
+            background: #f4f6f8;
+            color: #1f2937;
         }
 
         header {
-            background: #1f2937;
+            background: #17365d;
             color: white;
             padding: 35px 20px;
             text-align: center;
@@ -31,52 +31,52 @@
         }
 
         header p {
-            margin: 5px;
+            margin: 5px 0;
             font-size: 17px;
         }
 
-        .contenedor {
-            max-width: 1100px;
+        .container {
+            width: 92%;
+            max-width: 1200px;
             margin: 30px auto;
-            padding: 0 20px;
         }
 
-        .tarjeta {
+        .card {
             background: white;
+            border-radius: 12px;
             padding: 25px;
             margin-bottom: 25px;
-            border-radius: 12px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
         }
 
         h2 {
-            color: #1f2937;
-            border-bottom: 2px solid #ddd;
-            padding-bottom: 8px;
+            color: #17365d;
+            margin-top: 0;
+            border-bottom: 2px solid #e5e7eb;
+            padding-bottom: 10px;
         }
 
         h3 {
-            color: #374151;
+            color: #244f7d;
         }
 
-        .resultados {
+        .grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 15px;
-            margin-top: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 18px;
         }
 
-        .resultado {
-            background: #f8fafc;
-            border: 1px solid #ddd;
+        .metric {
+            background: #eef3f8;
             border-radius: 10px;
-            padding: 18px;
+            padding: 20px;
             text-align: center;
         }
 
-        .resultado strong {
+        .metric strong {
             display: block;
-            font-size: 25px;
+            font-size: 28px;
+            color: #17365d;
             margin-top: 8px;
         }
 
@@ -87,51 +87,69 @@
         }
 
         th, td {
-            border: 1px solid #ddd;
-            padding: 10px;
+            border: 1px solid #d1d5db;
+            padding: 11px;
             text-align: center;
         }
 
         th {
-            background: #e5e7eb;
+            background: #17365d;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background: #f8fafc;
+        }
+
+        .formula {
+            background: #f1f5f9;
+            padding: 15px;
+            border-left: 4px solid #17365d;
+            margin: 15px 0;
+        }
+
+        .interpretacion {
+            background: #f8fafc;
+            padding: 18px;
+            border-radius: 8px;
+            line-height: 1.6;
         }
 
         .grafico {
-            text-align: center;
-            margin-top: 20px;
-        }
-
-        .grafico img {
-            max-width: 100%;
-            width: 750px;
-            border: 1px solid #ddd;
+            width: 100%;
+            max-width: 950px;
+            display: block;
+            margin: 20px auto;
+            border: 1px solid #e5e7eb;
             border-radius: 8px;
         }
 
         .nota {
-            background: #f8fafc;
+            background: #fff7ed;
+            border-left: 4px solid #f97316;
             padding: 15px;
-            border-left: 5px solid #555;
-            margin-top: 15px;
+            line-height: 1.6;
         }
 
         footer {
-            text-align: center;
-            background: #1f2937;
+            background: #17365d;
             color: white;
+            text-align: center;
             padding: 25px;
             margin-top: 40px;
         }
 
-        @media (max-width: 800px) {
-            .resultados {
-                grid-template-columns: 1fr 1fr;
+        @media (max-width: 700px) {
+            header h1 {
+                font-size: 24px;
             }
-        }
 
-        @media (max-width: 500px) {
-            .resultados {
-                grid-template-columns: 1fr;
+            .container {
+                width: 95%;
+            }
+
+            table {
+                font-size: 13px;
             }
         }
     </style>
@@ -142,22 +160,24 @@
 <header>
     <h1>Proyecto Final de Econometría</h1>
     <p>Factores asociados a la probabilidad de trabajar en Ecuador</p>
-    <p>Modelos Logit y Probit</p>
+    <p><strong>Modelos Logit y Probit</strong></p>
 </header>
 
-<div class="contenedor">
+<div class="container">
 
-    <section class="tarjeta">
+    <!-- INFORMACIÓN GENERAL -->
+    <section class="card">
         <h2>1. Información del proyecto</h2>
 
         <p><strong>Universidad:</strong> Universidad Técnica de Cotopaxi</p>
         <p><strong>Carrera:</strong> Economía</p>
         <p><strong>Asignatura:</strong> Econometría</p>
         <p><strong>Autora:</strong> Jeniffer Orosco</p>
-        <p><strong>Fuente de información:</strong> Encuesta de Condiciones de Vida (ECV6R) - INEC Ecuador</p>
+        <p><strong>Fuente:</strong> Encuesta de Condiciones de Vida (ECV6R) - INEC Ecuador</p>
     </section>
 
-    <section class="tarjeta">
+    <!-- PREGUNTA -->
+    <section class="card">
         <h2>2. Pregunta de investigación</h2>
 
         <p>
@@ -166,7 +186,8 @@
         </p>
     </section>
 
-    <section class="tarjeta">
+    <!-- OBJETIVO -->
+    <section class="card">
         <h2>3. Objetivo</h2>
 
         <p>
@@ -175,7 +196,8 @@
         </p>
     </section>
 
-    <section class="tarjeta">
+    <!-- DATOS -->
+    <section class="card">
         <h2>4. Datos y variables</h2>
 
         <p>
@@ -183,16 +205,66 @@
             (ECV6R) del Instituto Nacional de Estadística y Censos (INEC).
         </p>
 
-        <ul>
-            <li><strong>Unidad de observación:</strong> persona.</li>
-            <li><strong>Variable dependiente:</strong> trabaja.</li>
-            <li><strong>Variables explicativas:</strong> hombre, EDAD, edad² y urbano.</li>
-            <li><strong>Factor de expansión:</strong> FEXP.</li>
-            <li><strong>Observaciones utilizadas:</strong> 85.950.</li>
-        </ul>
+        <div class="grid">
+
+            <div class="metric">
+                <span>Unidad de observación</span>
+                <strong>Persona</strong>
+            </div>
+
+            <div class="metric">
+                <span>Observaciones</span>
+                <strong>85.950</strong>
+            </div>
+
+            <div class="metric">
+                <span>Modelo</span>
+                <strong>Logit / Probit</strong>
+            </div>
+
+            <div class="metric">
+                <span>Factor de expansión</span>
+                <strong>FEXP</strong>
+            </div>
+
+        </div>
+
+        <h3>Variables utilizadas</h3>
+
+        <table>
+            <tr>
+                <th>Variable</th>
+                <th>Descripción</th>
+            </tr>
+            <tr>
+                <td>trabaja</td>
+                <td>Variable dependiente binaria</td>
+            </tr>
+            <tr>
+                <td>hombre</td>
+                <td>Indicador de sexo masculino</td>
+            </tr>
+            <tr>
+                <td>EDAD</td>
+                <td>Edad de la persona</td>
+            </tr>
+            <tr>
+                <td>edad²</td>
+                <td>Término cuadrático de la edad</td>
+            </tr>
+            <tr>
+                <td>urbano</td>
+                <td>Indicador de residencia urbana</td>
+            </tr>
+            <tr>
+                <td>FEXP</td>
+                <td>Factor de expansión</td>
+            </tr>
+        </table>
     </section>
 
-    <section class="tarjeta">
+    <!-- METODOLOGÍA -->
+    <section class="card">
         <h2>5. Metodología</h2>
 
         <p>
@@ -207,42 +279,48 @@
         </p>
 
         <p>
-            Además, se calcularon efectos marginales promedio, AUC,
-            accuracy, matriz de confusión y factores de inflación de la
-            varianza (VIF).
+            También se calcularon efectos marginales promedio, AUC,
+            accuracy, matriz de confusión y factores de inflación
+            de la varianza (VIF).
         </p>
     </section>
 
-    <section class="tarjeta">
+    <!-- RESULTADOS -->
+    <section class="card">
         <h2>6. Resultados principales</h2>
 
-        <div class="resultados">
+        <div class="grid">
 
-            <div class="resultado">
-                Pseudo R² Logit
+            <div class="metric">
+                <span>Pseudo R² Logit</span>
                 <strong>0.2748</strong>
             </div>
 
-            <div class="resultado">
-                Pseudo R² Probit
+            <div class="metric">
+                <span>Pseudo R² Probit</span>
                 <strong>0.2745</strong>
             </div>
 
-            <div class="resultado">
-                AUC Logit
+            <div class="metric">
+                <span>AUC Logit</span>
                 <strong>0.8341</strong>
             </div>
 
-            <div class="resultado">
-                Accuracy
+            <div class="metric">
+                <span>AUC Probit</span>
+                <strong>0.8340</strong>
+            </div>
+
+            <div class="metric">
+                <span>Accuracy Logit</span>
                 <strong>0.7713</strong>
             </div>
 
         </div>
     </section>
 
-    <section class="tarjeta">
-
+    <!-- EFECTOS MARGINALES -->
+    <section class="card">
         <h2>7. Efectos marginales promedio</h2>
 
         <table>
@@ -277,15 +355,16 @@
             </tr>
         </table>
 
-        <div class="nota">
-            Los efectos marginales se interpretan como asociaciones
-            estadísticas y no como efectos causales.
+        <div class="interpretacion">
+            <strong>Interpretación:</strong>
+            Los efectos marginales muestran asociaciones estadísticas
+            entre las variables explicativas y la probabilidad de trabajar.
+            No deben interpretarse como efectos causales.
         </div>
-
     </section>
 
-    <section class="tarjeta">
-
+    <!-- COMPARACIÓN -->
+    <section class="card">
         <h2>8. Comparación Logit vs Probit</h2>
 
         <table>
@@ -294,6 +373,7 @@
                 <th>Pseudo R²</th>
                 <th>AIC</th>
                 <th>Log-Likelihood</th>
+                <th>AUC</th>
             </tr>
 
             <tr>
@@ -301,6 +381,7 @@
                 <td>0.274846</td>
                 <td>83332.02</td>
                 <td>-41661.01</td>
+                <td>0.834103</td>
             </tr>
 
             <tr>
@@ -308,21 +389,23 @@
                 <td>0.274506</td>
                 <td>83371.11</td>
                 <td>-41680.55</td>
+                <td>0.834030</td>
             </tr>
-
         </table>
 
-        <p>
-            Ambos modelos presentan resultados muy similares. El modelo Logit
-            presenta ligeramente menor AIC y un pseudo R² ligeramente superior,
-            por lo que constituye la especificación preferida dentro de esta
-            comparación.
-        </p>
-
+        <div class="interpretacion">
+            <p>
+                Ambos modelos presentan resultados muy similares.
+                El modelo Logit presenta ligeramente menor AIC,
+                un pseudo R² ligeramente superior y un AUC marginalmente
+                mayor. Por estas razones, constituye la especificación
+                preferida dentro de esta comparación.
+            </p>
+        </div>
     </section>
 
-    <section class="tarjeta">
-
+    <!-- VIF -->
+    <section class="card">
         <h2>9. Diagnóstico de multicolinealidad</h2>
 
         <table>
@@ -352,24 +435,38 @@
             </tr>
         </table>
 
-        <p>
+        <div class="nota">
             Los VIF elevados de EDAD y edad² son esperables debido a la
             relación matemática entre una variable y su transformación
             cuadrática. Esto debe considerarse al interpretar los
             coeficientes individuales.
-        </p>
-
+        </div>
     </section>
 
-    <section class="tarjeta">
-
+    <!-- CAPACIDAD PREDICTIVA -->
+    <section class="card">
         <h2>10. Capacidad predictiva</h2>
 
-        <p><strong>AUC del modelo Logit:</strong> 0.8341</p>
+        <div class="grid">
 
-        <p><strong>Accuracy:</strong> 0.7713</p>
+            <div class="metric">
+                <span>AUC Logit</span>
+                <strong>0.8341</strong>
+            </div>
 
-        <h3>Matriz de confusión</h3>
+            <div class="metric">
+                <span>AUC Probit</span>
+                <strong>0.8340</strong>
+            </div>
+
+            <div class="metric">
+                <span>Accuracy Logit</span>
+                <strong>0.7713</strong>
+            </div>
+
+        </div>
+
+        <h3>Matriz de confusión - Logit</h3>
 
         <table>
             <tr>
@@ -390,98 +487,133 @@
                 <td>44.742</td>
             </tr>
         </table>
-
     </section>
 
-    <section class="tarjeta">
+    <!-- GRÁFICO LOGIT -->
+    <section class="card">
+        <h2>11. Curva ROC - Modelo Logit</h2>
 
-        <h2>11. Gráficos</h2>
+        <img
+            src="outputs/figures/curva_roc_logit.png"
+            alt="Curva ROC del modelo Logit"
+            class="grafico"
+        >
 
-        <div class="grafico">
+        <p>
+            El modelo Logit presenta un AUC de <strong>0.8341</strong>,
+            lo que evidencia una capacidad de discriminación adecuada.
+        </p>
+    </section>
 
-            <h3>Curva ROC del modelo Logit</h3>
+    <!-- GRÁFICO PROBIT -->
+    <section class="card">
+        <h2>12. Curva ROC - Modelo Probit</h2>
 
-            <img
-                src="../outputs/figures/curva_roc.png"
-                alt="Curva ROC del modelo Logit"
-                onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
-            >
+        <img
+            src="outputs/figures/curva_roc_probit.png"
+            alt="Curva ROC del modelo Probit"
+            class="grafico"
+        >
 
-            <p style="display:none;">
-                El gráfico de la curva ROC no pudo cargarse desde la ubicación
-                indicada.
+        <p>
+            El modelo Probit presenta un AUC de <strong>0.8340</strong>,
+            prácticamente equivalente al obtenido mediante Logit.
+        </p>
+    </section>
+
+    <!-- COMPARACIÓN GRÁFICA -->
+    <section class="card">
+        <h2>13. Comparación gráfica Logit vs Probit</h2>
+
+        <img
+            src="outputs/figures/comparacion_roc_logit_probit.png"
+            alt="Comparación de curvas ROC Logit y Probit"
+            class="grafico"
+        >
+
+        <div class="interpretacion">
+            <p>
+                Las curvas ROC de ambos modelos son prácticamente
+                coincidentes. El AUC del Logit es 0.834103 y el AUC
+                del Probit es 0.834030, por lo que ambos presentan
+                una capacidad predictiva muy similar.
             </p>
-
         </div>
-
     </section>
 
-    <section class="tarjeta">
-
-        <h2>12. Discusión</h2>
+    <!-- DISCUSIÓN -->
+    <section class="card">
+        <h2>14. Discusión</h2>
 
         <p>
-            Los resultados muestran asociaciones estadísticamente significativas
-            entre las características individuales consideradas y la probabilidad
-            de trabajar. El efecto marginal promedio asociado con la variable
-            hombre es positivo, mientras que el correspondiente a urbano es
-            negativo en la especificación estimada.
+            Los resultados muestran asociaciones estadísticamente
+            significativas entre las características individuales
+            consideradas y la probabilidad de trabajar.
         </p>
 
         <p>
-            La edad presenta un efecto positivo acompañado de un término
-            cuadrático negativo, lo que sugiere una relación no lineal entre
-            edad y probabilidad de trabajar.
+            El efecto marginal promedio asociado con la variable
+            <strong>hombre</strong> es positivo, mientras que el
+            correspondiente a <strong>urbano</strong> es negativo
+            en la especificación estimada.
         </p>
 
         <p>
-            Los resultados deben interpretarse como asociaciones estadísticas
-            y no como evidencia de relaciones causales.
+            La edad presenta un efecto positivo acompañado de un
+            término cuadrático negativo, lo que sugiere una relación
+            no lineal entre edad y probabilidad de trabajar.
         </p>
 
+        <p>
+            Los resultados deben interpretarse como asociaciones
+            estadísticas y no como evidencia de relaciones causales.
+        </p>
     </section>
 
-    <section class="tarjeta">
-
-        <h2>13. Conclusiones y limitaciones</h2>
+    <!-- CONCLUSIONES -->
+    <section class="card">
+        <h2>15. Conclusiones y limitaciones</h2>
 
         <p>
-            Los modelos Logit y Probit permiten estudiar la probabilidad de
-            trabajar a partir de características individuales y territoriales.
-            Los resultados de ambos modelos son similares y presentan una
-            capacidad predictiva razonable.
+            Los modelos Logit y Probit permiten estudiar la probabilidad
+            de trabajar a partir de características individuales y
+            territoriales.
         </p>
 
         <p>
-            El modelo Logit presenta un AUC de 0.8341 y una exactitud de
-            clasificación de 0.7713.
+            Los resultados de ambos modelos son similares y presentan
+            una capacidad predictiva razonable.
+        </p>
+
+        <p>
+            El modelo Logit presenta un AUC de 0.8341 y una exactitud
+            de clasificación de 0.7713.
         </p>
 
         <p>
             Entre las limitaciones se encuentra el tratamiento del diseño
-            muestral de la encuesta y la utilización del factor de expansión
-            sin incorporar necesariamente todos los componentes del diseño
-            complejo.
+            muestral de la encuesta y la utilización del factor de
+            expansión sin incorporar necesariamente todos los componentes
+            del diseño complejo.
         </p>
-
     </section>
 
-    <section class="tarjeta">
-
-        <h2>14. Referencias</h2>
+    <!-- REFERENCIAS -->
+    <section class="card">
+        <h2>16. Referencias</h2>
 
         <p>
-            Las referencias académicas y metodológicas utilizadas se encuentran
-            documentadas en el minipaper del proyecto.
+            Las referencias académicas y metodológicas utilizadas se
+            encuentran documentadas en el mini paper del proyecto.
         </p>
-
     </section>
 
 </div>
 
 <footer>
-    <p>Proyecto Final de Econometría - Universidad Técnica de Cotopaxi</p>
-    <p>Jeniffer Orosco - 2026</p>
+    <p><strong>Proyecto Final de Econometría</strong></p>
+    <p>Universidad Técnica de Cotopaxi - Carrera de Economía</p>
+    <p>Modelos Logit y Probit</p>
 </footer>
 
 </body>
